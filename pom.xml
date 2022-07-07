@@ -7,6 +7,10 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>gulimall</name>
 
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
     <description>聚合服务，是当前所有项目的父项目</description>
     <packaging>pom</packaging>
 
@@ -16,7 +20,10 @@
         <module>guli-coupon</module>
         <module>gulimall-member</module>
         <module>gulimall-ware</module>
+        <module>renren-generator</module>
+        <module>renren-fast</module>
     </modules>
+
 
 
 
