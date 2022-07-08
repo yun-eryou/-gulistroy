@@ -18,6 +18,9 @@
 
     <dependencies>
 
+
+
+
         <dependency>
             <groupId>com.atguigu.guilimall</groupId>
             <artifactId>guli-common</artifactId>

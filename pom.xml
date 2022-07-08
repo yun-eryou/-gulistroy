@@ -14,6 +14,8 @@
     <description>聚合服务，是当前所有项目的父项目</description>
     <packaging>pom</packaging>
 
+
+
     <modules>
         <module>guilimall-order</module>
         <module>guilimall-product</module>
