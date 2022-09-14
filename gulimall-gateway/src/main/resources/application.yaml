@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    password: root
+    username: root
+    url: jdbc:mysql://39.105.30.41:3306/gulimall_sms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      routes:
+        - id: admin_route
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+## 前端的项目都将带上/api这个前置
+
+server:
+  port: 88
