@@ -1,21 +1,16 @@
-package com.atguigu.gulimall.product;
+package com.atguigu.gulimall.thirdparty;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
-// 在这个项目中使用逻辑删除
-
 @EnableDiscoveryClient
-@MapperScan("com.atguigu.gulimall.product.dao")
 @SpringBootApplication
-public class GuilimallProductApplication {
+public class GulimallThirdPartyApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GuilimallProductApplication.class, args);
+        SpringApplication.run(GulimallThirdPartyApplication.class, args);
     }
-
 
 }
