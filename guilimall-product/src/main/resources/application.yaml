@@ -31,3 +31,9 @@ server:
 logging:
   level:
     com.atguigu.gulimall: debug
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 100000 #单位毫秒
+        readTimeout: 100000 #单位毫秒

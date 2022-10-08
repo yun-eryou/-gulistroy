@@ -2,6 +2,7 @@ package com.atguigu.gulimall.ware.service.impl;
 
 import com.atguigu.common.utils.R;
 import com.atguigu.gulimall.ware.feign.ProductFeignService;
+import com.atguigu.gulimall.ware.vo.SkuHasStockVo;
 import org.apache.commons.lang.StringUtils;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -63,7 +66,7 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             wareSkuEntity.setStock(skuNum);
             wareSkuEntity.setWareId(wareId);
             wareSkuEntity.setStockLocked(0);
-            //TODO 远程查选sku的名字,如果失败了，整个事务不需要回滚
+            //TODO 远程查询sku的名字,如果失败了，整个事务不需要回滚
             // TODO 第一种是自己catch掉，第二种是什么让异常出现以后不回滚？（高级篇）
             try {
                 R info = productFeignService.info(skuId);
@@ -82,6 +85,21 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             wareSkuDao.addStock(skuId,wareId,skuNum);
 
         }
+    }
+
+    @Override
+    public List<SkuHasStockVo> getSkuHasStock(List<Long> skuIds) {
+
+        List<SkuHasStockVo> collect = skuIds.stream().map(skuId -> {
+            SkuHasStockVo skuHasStockVo = new SkuHasStockVo();
+
+            // 查询当前sku的总库存量
+            Long count=  baseMapper.getSkuStock(skuId);
+            skuHasStockVo.setSkuId(skuId);
+            skuHasStockVo.setHasStock(count==null?false:count>0);
+            return skuHasStockVo;
+        }).collect(Collectors.toList());
+        return collect;
     }
 
 }
