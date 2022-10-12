@@ -15,7 +15,10 @@ buildNumber.properties
 **/.mvn
 **/target/
 
+**/src/main/resources/static/**
+*.png
+*.js
+*.webp
 .idea
-
 
 **/.gitignore
